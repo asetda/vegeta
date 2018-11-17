@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"time"
 
-	vegeta "github.com/tsenart/vegeta/lib"
+	vegeta "github.com/asetda/vegeta/lib"
 )
 
 const reportUsage = `Usage: vegeta report [options] [<file>...]

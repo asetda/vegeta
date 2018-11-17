@@ -199,6 +199,10 @@ func H2C(enabled bool) func(*Attacker) {
 	}
 }
 
+func IncludeRequestId(includeRequestId bool) func(*Attacker) {
+	return func(a *Attacker) { a.withRequestId = includeRequestId }
+}
+
 // MaxBody returns a functional option which limits the max number of bytes
 // read from response bodies. Set to -1 to disable any limits.
 func MaxBody(n int64) func(*Attacker) {

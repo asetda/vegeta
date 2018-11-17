@@ -137,7 +137,7 @@ func attack(opts *attackOpts) (err error) {
 	case vegeta.JSONTargetFormat:
 		tr = vegeta.NewJSONTargeter(src, body, hdr)
 	case vegeta.HTTPTargetFormat:
-		tr = vegeta.NewHTTPTargeter(src, body, hdr, opts.requestId)
+		tr = vegeta.NewHTTPTargeter(src, body, hdr)
 	default:
 		return fmt.Errorf("format %q isn't one of [%s]",
 			opts.format, strings.Join(vegeta.TargetFormats, ", "))
@@ -173,7 +173,7 @@ func attack(opts *attackOpts) (err error) {
 		vegeta.HTTP2(opts.http2),
 		vegeta.H2C(opts.h2c),
 		vegeta.MaxBody(opts.maxBody),
-		opts.requestId,
+		vegeta.IncludeRequestId(opts.requestId),
 	)
 
 	res := atk.Attack(tr, opts.rate, opts.duration, opts.name)
