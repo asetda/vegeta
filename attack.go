@@ -173,7 +173,7 @@ func attack(opts *attackOpts) (err error) {
 		vegeta.HTTP2(opts.http2),
 		vegeta.H2C(opts.h2c),
 		vegeta.MaxBody(opts.maxBody),
-		opts.requestId
+		opts.requestId,
 	)
 
 	res := atk.Attack(tr, opts.rate, opts.duration, opts.name)
