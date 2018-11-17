@@ -13,8 +13,8 @@ import (
 	"strconv"
 	"time"
 
-	vegeta "github.com/tsenart/vegeta/lib"
-	"github.com/tsenart/vegeta/lib/lttb"
+	vegeta "github.com/asetda/vegeta/lib"
+	"github.com/asetda/vegeta/lib/lttb"
 )
 
 // An Plot represents an interactive HTML time series
