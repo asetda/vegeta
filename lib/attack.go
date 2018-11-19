@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+    "math/rand"
 	"net"
 	"net/http"
 	"net/url"
@@ -25,6 +26,7 @@ type Attacker struct {
 	seqmu     sync.Mutex
 	seq       uint64
 	withRequestId bool
+	rng       *rand.Rand
 }
 
 const (
@@ -78,6 +80,8 @@ func NewAttacker(opts ...func(*Attacker)) *Attacker {
 			MaxIdleConnsPerHost:   DefaultConnections,
 		},
 	}
+
+    a.rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	for _, opt := range opts {
 		opt(a)
@@ -306,7 +310,8 @@ func (a *Attacker) hit(tr Targeter, name string) *Result {
 		return &res
 	}
 
-	req, err := tgt.Request(a.withRequestId)
+    rid := fmt.Sprintf("vegeta-%016x", a.rng.Int63())
+	req, err := tgt.Request(a.withRequestId, rid)
 	if err != nil {
 		return &res
 	}
