@@ -311,8 +311,7 @@ func NewHTTPTargeter(src io.Reader, body []byte, hdr http.Header) Targeter {
 						var lb = []byte(sc.Text())
 						tgt.Body = append(tgt.Body, lb...)
 					}
-				}
-				if tgt.Body, err = ioutil.ReadFile(line[1:]); err != nil {
+				} else if tgt.Body, err = ioutil.ReadFile(line[1:]); err != nil {
 					return fmt.Errorf("bad body: %s", err)
 				}
 				break
