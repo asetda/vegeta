@@ -304,13 +304,10 @@ func NewHTTPTargeter(src io.Reader, body []byte, hdr http.Header) Targeter {
 				break
 			} else if strings.HasPrefix(line, "@") {
 				if len(line) == 1 {
-					for {
-						if !sc.Scan() || len(line) == 0 {
-							break
-						}
-						var lb = []byte(sc.Text())
-						tgt.Body = append(tgt.Body, lb...)
+					if !sc.Scan() {
+						break
 					}
+					tgt.Body = []byte(sc.Text())
 				} else if tgt.Body, err = ioutil.ReadFile(line[1:]); err != nil {
 					return fmt.Errorf("bad body: %s", err)
 				}
