@@ -33,7 +33,7 @@ func TestTargetRequest(t *testing.T) {
 			"Host":                []string{"lolcathost"},
 		},
 	}
-	req, _ := tgt.Request()
+	req, _ := tgt.Request(false, "")
 
 	reqBody, err := ioutil.ReadAll(req.Body)
 	if err != nil {
